@@ -1,6 +1,8 @@
 name: socat
 on:
   workflow_dispatch
+permissions:
+  contents: write
 jobs:
     build-x86:
       name: Build socat x86
