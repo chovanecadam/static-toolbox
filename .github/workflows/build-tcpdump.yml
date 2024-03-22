@@ -111,6 +111,7 @@ jobs:
         - name: Tag Release # temporary change by setting new release to always true
           run: |
             set +e
+            git fetch --tags
             if git rev-list "tcpdump-v${{ needs.build-x86.outputs.version }}" >/dev/null;then
               echo "Tag for tcpdump-v${{ needs.build-x86.outputs.version }} already exists. Skipping release creation."
               echo "NEW_RELEASE=true" >> "$GITHUB_OUTPUT"
