@@ -108,16 +108,16 @@ jobs:
         - name: List Artifacts
           run: ls -laR /tmp/releases
 
-        - name: Tag Release
+        - name: Tag Release # temporary change by setting new release to always true
           run: |
             set +e
             if git rev-list "tcpdump-v${{ needs.build-x86.outputs.version }}".. >/dev/null;then
               echo "Tag for tcpdump-v${{ needs.build-x86.outputs.version }} already exists. Skipping release creation."
-              echo "NEW_RELEASE=false" >> $GITHUB_OUTPUT
+              echo "NEW_RELEASE=true" >> "$GITHUB_OUTPUT"
             else
               git tag "tcpdump-v${{ needs.build-x86.outputs.version }}"
               git push origin "tcpdump-v${{ needs.build-x86.outputs.version }}"
-              echo "NEW_RELEASE=true" >> $GITHUB_OUTPUT
+              echo "NEW_RELEASE=true" >> "$GITHUB_OUTPUT"
             fi
 
         - name: Create Release
