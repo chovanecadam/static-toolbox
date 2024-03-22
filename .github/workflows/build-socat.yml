@@ -201,7 +201,7 @@ jobs:
           run: ls -laR /tmp/releases
 
         - name: Fetch tags
-          run: git fetch --tags
+          run: git fetch --tags --prune --quiet
 
         - name: Tag Release
           id: tag_release

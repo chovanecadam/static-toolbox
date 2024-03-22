@@ -107,11 +107,14 @@ jobs:
         - name: List Artifacts
           run: ls -laR /tmp/releases
 
+        - name: Fetch tags
+          run: git fetch --tags --prune --quiet
+
         - name: Tag Release
           id: tag_release
           run: |
             set +e
-            if git rev-list "openssh-v${{ needs.build-x86.outputs.version }}".. >/dev/null;then
+            if git rev-list "openssh-v${{ needs.build-x86.outputs.version }}" >/dev/null;then
               echo "Tag for openssh-v${{ needs.build-x86.outputs.version }} already exists. Skipping release creation."
               echo "NEW_RELEASE=false" >> $GITHUB_OUTPUT
             else
