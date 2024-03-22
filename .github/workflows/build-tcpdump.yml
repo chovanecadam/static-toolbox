@@ -108,6 +108,7 @@ jobs:
           run: ls -laR /tmp/releases
 
         - name: Tag Release
+          permissions: write
           run: |
             set +e
             if git rev-list "tcpdump-v${{ needs.build-x86.outputs.version }}".. >/dev/null;then
