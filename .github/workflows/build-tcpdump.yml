@@ -109,6 +109,7 @@ jobs:
           run: ls -laR /tmp/releases
 
         - name: Tag Release # temporary change by setting new release to always true
+          id: tag_release
           run: |
             set +e
             git fetch --tags
@@ -123,7 +124,7 @@ jobs:
 
         - name: Create Release
           uses: ncipollo/release-action@v1
-          if: ${{ steps.tag-release.outputs.NEW_RELEASE == 'true' }}
+          if: ${{ steps.tag_release.outputs.NEW_RELEASE == 'true' }}
           with:
             name: tcpdump-v${{ needs.build-x86.outputs.version }}
             tag: tcpdump-v${{ needs.build-x86.outputs.version }}

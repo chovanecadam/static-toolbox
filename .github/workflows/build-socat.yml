@@ -200,6 +200,9 @@ jobs:
         - name: List Artifacts
           run: ls -laR /tmp/releases
 
+        - name: Fetch tags
+          run: git fetch --tags
+
         - name: Tag Release
           id: tag_release
           run: |
